@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Cairo', sans-serif;
+  color: #3d2f3e;
+  background: #1a1220;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+/* ===== Page & fixed background ===== */
+.wedding-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background: url('/background.jpg') center / cover no-repeat;
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(180deg, rgba(26,18,32,.35) 0%, rgba(26,18,32,.15) 30%, rgba(26,18,32,.45) 100%);
+}
+
+/* ===== Cover screen ===== */
+.cover-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 12, 26, .6);
+  backdrop-filter: blur(6px);
+  transition: opacity .9s ease, visibility .9s ease;
+}
+.cover-screen--opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cover-button {
+  position: relative;
+  width: min(88vw, 420px);
+  padding: 0;
+  border: none;
+  background: none;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.cover-button:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 28px 70px rgba(0,0,0,.6);
+}
+.cover-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+.cover-hint {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .6; }
+  50% { opacity: 1; }
+}
+
+/* ===== Main content ===== */
+.invitation-content {
+  max-width: 680px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 60px 20px 50px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease .3s, transform 1s ease .3s;
+}
+.invitation-content--visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Calligraphy header ===== */
+.calligraphy-section {
+  text-align: center;
+  padding: 30px 0 20px;
+}
+
+.bismillah {
+  margin: 0 0 18px;
+  color: rgba(255,255,255,.85);
+  font: 400 20px/1.6 'Amiri', serif;
+  text-shadow: 0 2px 10px rgba(0,0,0,.4);
+}
+
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px auto;
+  color: rgba(255,255,255,.7);
+  font-size: 16px;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.5));
+}
+.ornament-divider::after {
+  background: linear-gradient(90deg, rgba(255,255,255,.5), transparent);
+}
+
+.amp-sign {
+  margin: 8px 0 4px;
+  color: #fff;
+  font: 700 clamp(48px, 12vw, 76px)/1.1 'Reem Kufi', sans-serif;
+  text-shadow: 0 3px 14px rgba(0,0,0,.45);
+  letter-spacing: 2px;
+}
+
+.amp-label {
+  margin: 0;
+  color: rgba(255,255,255,.8);
+  font: 400 22px 'Amiri', serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+.wedding-date {
+  margin: 10px 0 0;
+  color: rgba(255,255,255,.65);
+  font: 500 15px 'Cairo', sans-serif;
+  letter-spacing: 1.5px;
+}
+
+/* ===== Couple photo ===== */
+.couple-section {
+  padding: 20px 0 30px;
+}
+
+.couple-frame {
+  position: relative;
+  width: min(100%, 520px);
+  margin: 0 auto;
+  padding: 10px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.3);
+}
+
+.couple-frame__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.couple-frame__inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.couple-frame__inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.3);
+  pointer-events: none;
+}
+
+/* ===== Lyrics ===== */
+.lyrics-section {
+  padding: 10px 0 24px;
+}
+
+.lyrics-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  text-align: center;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.lyrics {
+  margin: 0;
+  color: rgba(255,255,255,.92);
+  font: 400 21px/1.9 'Amiri', serif;
+  text-shadow: 0 1px 6px rgba(0,0,0,.3);
+}
+
+.lyrics p {
+  margin: 0;
+}
+
+/* ===== Audio player — white theme, rounded ===== */
+.player-section {
+  padding: 8px 0 40px;
+}
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  direction: ltr;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.82));
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 8px 28px rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.5) inset;
+}
+
+.play-button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #6b4f70, #4a3550);
+  box-shadow: 0 4px 14px rgba(74,53,80,.35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.play-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(74,53,80,.45);
+}
+.play-button:active {
+  transform: scale(.96);
+}
+
+.player-info {
+  min-width: 0;
+  flex: 1;
+  text-align: right;
+}
+
+.player-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 6px;
+  color: #4a3550;
+  font: 600 12px 'Cairo', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-bar {
+  display: block;
+  width: 100%;
+  height: 5px;
+  accent-color: #6b4f70;
+  cursor: pointer;
+}
+
+.music-note {
+  color: #b8a0bd;
+  font: 26px 'Amiri', serif;
+  flex: 0 0 auto;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 560px) {
+  .invitation-content {
+    padding: 36px 14px 30px;
+  }
+  .bismillah { font-size: 18px; }
+  .lyrics-card { padding: 24px 18px; }
+  .lyrics { font-size: 19px; }
+  .audio-player { padding: 12px 16px; gap: 10px; }
+  .play-button { flex-basis: 38px; width: 38px; height: 38px; }
+  .player-title { font-size: 11px; }
+}
